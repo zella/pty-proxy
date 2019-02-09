@@ -6,9 +6,11 @@ const ROWS = parseInt(process.env.ROWS) || 24;
 
 const shell = process.env.SHELL || (os.platform() === 'win32' ? 'powershell.exe' : 'bash');
 
+const cmd = JSON.parse(process.env.CMD) || [];
+
 process.stdin.resume();
 
-const ptyProcess = pty.spawn(shell, [], {
+const ptyProcess = pty.spawn(shell, cmd, {
   name: 'xterm-color',
   cols: COLS,
   rows: ROWS,
